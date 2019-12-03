@@ -1,7 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using System;
 using Xunit;
+using System.Linq;
 
 namespace Project1
 {
@@ -39,27 +41,42 @@ namespace Project1
             var link = queryBox.FindElement(By.TagName("a"));
             link.Click();
             var queryBoxComment = browser.FindElement(By.Id("comment"));
-            queryBoxComment.Click();
-            queryBoxComment.SendKeys("Komentarz2");
+            var exampleText = Faker.Lorem.Paragraph();
+            queryBoxComment.SendKeys(exampleText);
             var queryBoxAuthot = browser.FindElement(By.Id("author"));
-            queryBoxAuthot.SendKeys("Autor");
+            var exampleAuthor = Faker.Lorem.Paragraph();
+            queryBoxAuthot.SendKeys(exampleAuthor);
             var queryBoxEmail = browser.FindElement(By.Id("email"));
             queryBoxEmail.SendKeys("igarrazuxo-6741@yopmail.com");
+            MoveToElement(browser.FindElement(By.CssSelector("div.nav-links")));
             var PublishComment = browser.FindElement(By.Id("submit"));
             PublishComment.Click();
-            var contentComment = browser.FindElement(By.CssSelector(".comment-content"));
-            var y = contentComment.FindElement(By.TagName("p"));
+            var contentCommentAfterPublish = browser.FindElement(By.CssSelector(".comment-content"));
+            var y = contentCommentAfterPublish.FindElement(By.TagName("p"));
+            var comments = browser.FindElements(By.CssSelector("article.comment-body"));
+            var myComments = comments
+                .Where(c => c.FindElement(By.CssSelector(".fn")).Text == exampleAuthor)
+                .Where(c => c.FindElement(By.CssSelector(".comment-content > p")).Text == exampleText);
 
 
-            Assert.Equal("Komentarz2", y.Text );
+            Assert.Single(myComments);
 
 
         }
+        private void MoveToElement(IWebElement element)
+        {
+            Actions builder = new Actions(browser);
+            Actions moveTo = builder.MoveToElement(element);
+            moveTo.Build().Perform();
+
+        }
+
 
         public void Dispose()
         {
             browser.Quit();
         }
 
+       
     }
 }
