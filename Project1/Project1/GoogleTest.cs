@@ -51,8 +51,7 @@ namespace Project1
             MoveToElement(browser.FindElement(By.CssSelector("div.nav-links")));
             var PublishComment = browser.FindElement(By.Id("submit"));
             PublishComment.Click();
-            var contentCommentAfterPublish = browser.FindElement(By.CssSelector(".comment-content"));
-            var y = contentCommentAfterPublish.FindElement(By.TagName("p"));
+            
             var comments = browser.FindElements(By.CssSelector("article.comment-body"));
             var myComments = comments
                 .Where(c => c.FindElement(By.CssSelector(".fn")).Text == exampleAuthor)
