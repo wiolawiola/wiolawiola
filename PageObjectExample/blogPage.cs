@@ -30,7 +30,7 @@ namespace PageObjectExample
             return new blogPage(_browser);
         }
 
-        public blogPage AddWpis(ExampleWpis exampleWpis)
+        public string AddWpis(ExampleWpis exampleWpis)
         {
             var AddNewWpis = _browser.FindElement(By.Id("title"));
             AddNewWpis.SendKeys(exampleWpis.Title);
@@ -38,8 +38,13 @@ namespace PageObjectExample
             var AddNewWpisContent = _browser.FindElement(By.Id("content"));
             AddNewWpisContent.SendKeys(exampleWpis.ContentWpis);
 
-                                  
-            return new blogPage(_browser);
+
+            WaitForClickable(By.CssSelector("#sample-permalink > a"),5);
+
+           var link = _browser.FindElement(By.CssSelector("#sample-permalink > a"));
+            var linktekst = link.GetAttribute("href");
+
+            return linktekst;
         }
 
         public blogPage LogOut()

@@ -19,9 +19,11 @@ namespace PageObjectExample
             var AdminPage = blogPage.AddNote();
             var AdminPageWpisy = blogPage.AddNewNote();
             var exampleText = new ExampleWpis();
-            var NoteWithWpis = AdminPageWpisy.AddWpis(exampleText);
-            var PublishNote = NoteWithWpis.PublishWpis();
+            var link = AdminPageWpisy.AddWpis(exampleText);
+            var PublishNote = AdminPageWpisy.PublishWpis();
             var LogOut = PublishNote.LogOut();
+
+
 
 
 
