@@ -36,6 +36,26 @@ namespace PageObjectExample
             return new NotePage(_browser);
         }
 
+        internal bool HasNote(ExampleWpis exampleText)
+        {
+            //var note = _browser.FindElements(By.TagName("article"));
+            //var myNote = note
+            //     .Where(c => c.FindElement(By.CssSelector(".entry-title")).Text == exampleText.Title)
+            //     .Where(c => c.FindElement(By.CssSelector(".entry-content > p")).Text == exampleText.ContentWpis);
+
+            var x = _browser.FindElement(By.CssSelector(".entry-title"));
+            var y = _browser.FindElement(By.CssSelector(".entry-content > p"));
+
+            return x.Text == exampleText.Title && y.Text == exampleText.ContentWpis;
+            
+           // return myNote.Count() == 1;
+        }
+
+        internal void GoTo(string link)
+        {
+            _browser.Navigate().GoToUrl(link);
+        }
+
         internal bool Has(ExampleComment exampleComment)
         {
             var comments = _browser.FindElements(By.CssSelector("article.comment-body"));

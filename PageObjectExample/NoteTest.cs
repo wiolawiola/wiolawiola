@@ -21,7 +21,11 @@ namespace PageObjectExample
             var exampleText = new ExampleWpis();
             var link = AdminPageWpisy.AddWpis(exampleText);
             var PublishNote = AdminPageWpisy.PublishWpis();
-            var LogOut = PublishNote.LogOut();
+            PublishNote.LogOut();
+            var PageResult = new NotePage(GetBrowser());
+            PageResult.GoTo(link);
+
+            Assert.True(PageResult.HasNote(exampleText));
 
 
 

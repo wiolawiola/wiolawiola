@@ -47,7 +47,7 @@ namespace PageObjectExample
             return linktekst;
         }
 
-        public blogPage LogOut()
+        public void LogOut()
         {
             //var PanelLogOut = _browser.FindElement(By.Id("wp-admin-bar-my-account"));
             //PanelLogOut.Click();
@@ -59,7 +59,6 @@ namespace PageObjectExample
             var ButtonLogOut = _browser.FindElement(By.Id("wp-admin-bar-logout"));
             ButtonLogOut.Click();
 
-            return new blogPage(_browser);
         }
 
         public blogPage PublishWpis()
