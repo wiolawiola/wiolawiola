@@ -17,8 +17,13 @@ namespace PageObjectExample
             var blogStartPage = LoginPage.Open(GetBrowser());
             var blogPage = blogStartPage.EnterUserDataAndLogin();
             var AdminPage = blogPage.AddNote();
-            
-           
+            var AdminPageWpisy = blogPage.AddNewNote();
+            var exampleText = new ExampleWpis();
+            var NoteWithWpis = AdminPageWpisy.AddWpis(exampleText);
+            var PublishNote = NoteWithWpis.PublishWpis();
+            var LogOut = PublishNote.LogOut();
+
+
 
         }
 

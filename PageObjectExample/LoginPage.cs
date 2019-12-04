@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace PageObjectExample
 {
@@ -20,6 +22,7 @@ namespace PageObjectExample
 
         internal blogPage EnterUserDataAndLogin()
         {
+            WaitForClickable(By.Id("user_login"),5);
             var queryBox = _browser.FindElement(By.Id("user_login"));
             queryBox.SendKeys("automatyzacja");
 
@@ -31,6 +34,12 @@ namespace PageObjectExample
            
 
             return new blogPage(_browser);
+        }
+
+        internal void WaitForClickable(By by, int seconds)
+        {
+            var wait = new WebDriverWait(_browser, TimeSpan.FromSeconds(seconds));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
         }
 
     }
