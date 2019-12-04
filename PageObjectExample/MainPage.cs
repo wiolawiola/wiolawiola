@@ -24,7 +24,7 @@ namespace PageObjectExample
             var link = queryBox.FindElement(By.TagName("a"));
             link.Click();
 
-            return new NotePage();
+            return new NotePage(_browser);
         }
     }
 }

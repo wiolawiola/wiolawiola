@@ -14,7 +14,7 @@ namespace PageObjectExample
         public void Can_add_new_comment_to_latest_note()
         {
             var blogStartPage = MainPage.Open();
-          var note = blogStartPage.NavigateToNewesNote();
+            var note = blogStartPage.NavigateToNewesNote();
             var exampleComment = new ExampleComment();
             var noteWithComment = note.AddComent(exampleComment);
 

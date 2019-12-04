@@ -40,14 +40,19 @@ namespace Project1
             var queryBox = browser.FindElement(By.CssSelector(".entry-title"));
             var link = queryBox.FindElement(By.TagName("a"));
             link.Click();
+
             var queryBoxComment = browser.FindElement(By.Id("comment"));
             var exampleText = Faker.Lorem.Paragraph();
             queryBoxComment.SendKeys(exampleText);
+
             var queryBoxAuthot = browser.FindElement(By.Id("author"));
             var exampleAuthor = Faker.Lorem.Paragraph();
             queryBoxAuthot.SendKeys(exampleAuthor);
+
             var queryBoxEmail = browser.FindElement(By.Id("email"));
-            queryBoxEmail.SendKeys("igarrazuxo-6741@yopmail.com");
+            var exampleEmail = Faker.Internet.Email();
+            queryBoxEmail.SendKeys(exampleEmail);
+
             MoveToElement(browser.FindElement(By.CssSelector("div.nav-links")));
             var PublishComment = browser.FindElement(By.Id("submit"));
             PublishComment.Click();
