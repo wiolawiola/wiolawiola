@@ -5,7 +5,7 @@ namespace PageObjectExample
 {
     internal partial class MainPage
     {
-        private const string MAIN_PAGE_BASE_URL = "http://automatyzacja.benedykt.net";
+        private const string MAIN_PAGE_BASE_URL = "http://automatyzacja.benedykt.net/";
         private readonly IWebDriver _browser;
 
         private MainPage(IWebDriver browser) 
@@ -13,9 +13,9 @@ namespace PageObjectExample
             _browser = browser;
             browser.Navigate().GoToUrl(MAIN_PAGE_BASE_URL);
         }
-        internal static MainPage Open()
+        internal static MainPage Open(IWebDriver webDriver)
         {
-            return new MainPage(DriverFactory.Get());
+            return new MainPage(webDriver);
         }
 
         internal NotePage NavigateToNewesNote()
