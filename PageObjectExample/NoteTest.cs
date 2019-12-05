@@ -9,7 +9,7 @@ namespace PageObjectExample
 {
     public class NoteTest : BaseTest
     {
-      
+
 
         [Fact]
         public void Can_publish_new_note()
@@ -20,19 +20,13 @@ namespace PageObjectExample
             var AdminPageWpisy = blogPage.AddNewNote();
             var exampleText = new ExampleWpis();
             var link = AdminPageWpisy.AddWpis(exampleText);
-            // var PublishNote = AdminPageWpisy.PublishWpis();
             blogPage.LogOut();
             var PageResult = new NotePage(GetBrowser());
             PageResult.GoTo(link);
 
             Assert.True(PageResult.HasNote(exampleText));
 
-
-
-
-
         }
-
 
     }
 }

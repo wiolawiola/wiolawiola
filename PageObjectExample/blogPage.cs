@@ -9,16 +9,12 @@ namespace PageObjectExample
     internal class blogPage
     {
         private IWebDriver _browser;
-      
-        
-
+               
         public blogPage(IWebDriver browser)
         {
             _browser = browser;
         }
-
-      
-
+               
         public blogPage AddNote()
         {
             var MenuOptions = _browser.FindElements(By.CssSelector(".wp-menu-name"));
@@ -37,7 +33,7 @@ namespace PageObjectExample
 
             var AddNewWpisContent = _browser.FindElement(By.Id("content"));
             AddNewWpisContent.SendKeys(exampleWpis.ContentWpis);
-                                               
+
             WaitForClickable(By.CssSelector(".edit-slug"), 5);
 
             var PublishWpisButton = _browser.FindElement(By.Id("publishing-action"));
@@ -52,26 +48,19 @@ namespace PageObjectExample
         }
 
         public void LogOut()
-        {
-            //var PanelLogOut = _browser.FindElement(By.Id("wp-admin-bar-my-account"));
-            //PanelLogOut.Click();
-
+        {            
             MoveToElement(By.Id("wp-admin-bar-my-account"));
 
             WaitForClickable(By.Id("wp-admin-bar-logout"), 10);
 
             var ButtonLogOut = _browser.FindElement(By.Id("wp-admin-bar-logout"));
             ButtonLogOut.Click();
-
         }
 
         public blogPage PublishWpis()
         {
             var PublishWpisButton = _browser.FindElement(By.Id("publishing-action"));
             PublishWpisButton.Click();
-
-
-
 
             return new blogPage(_browser);
         }
@@ -90,11 +79,13 @@ namespace PageObjectExample
             var wait = new WebDriverWait(_browser, TimeSpan.FromSeconds(seconds));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
         }
+
         internal void MoveToElement(By selector)
         {
             var element = _browser.FindElement(selector);
             MoveToElement(element);
         }
+
         internal void MoveToElement(IWebElement element)
         {
             Actions builder = new Actions(_browser);
