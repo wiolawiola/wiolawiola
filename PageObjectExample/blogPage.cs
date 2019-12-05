@@ -37,11 +37,15 @@ namespace PageObjectExample
 
             var AddNewWpisContent = _browser.FindElement(By.Id("content"));
             AddNewWpisContent.SendKeys(exampleWpis.ContentWpis);
+                                               
+            WaitForClickable(By.CssSelector(".edit-slug"), 5);
 
+            var PublishWpisButton = _browser.FindElement(By.Id("publishing-action"));
+            PublishWpisButton.Click();
 
-            WaitForClickable(By.CssSelector("#sample-permalink > a"),5);
+            WaitForClickable(By.CssSelector("#sample-permalink > a"), 5);
 
-           var link = _browser.FindElement(By.CssSelector("#sample-permalink > a"));
+            var link = _browser.FindElement(By.CssSelector("#sample-permalink > a"));
             var linktekst = link.GetAttribute("href");
 
             return linktekst;
@@ -65,6 +69,8 @@ namespace PageObjectExample
         {
             var PublishWpisButton = _browser.FindElement(By.Id("publishing-action"));
             PublishWpisButton.Click();
+
+
 
 
             return new blogPage(_browser);
